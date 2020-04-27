@@ -1,0 +1,23 @@
+`query {
+    repository(name: "node-gyp", owner: "nodejs") {
+      ref(qualifiedName: "refs/heads/master") {
+        target {
+          ... on Commit {
+            history {
+              edges {
+                node {
+                  author {
+                    date
+                    user {
+                      location
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

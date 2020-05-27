@@ -14,7 +14,7 @@ var tokenAPI = ''
 fs.readFile('token.txt', 'utf8', function(err, contents) {
     tokenAPI = contents;
     client.setHeader('Authorization', `Bearer ${tokenAPI}`)
-    console.log(`API Token loaded `)
+    console.log(`Github API Token loaded `)
 });
 
 

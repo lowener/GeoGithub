@@ -1,6 +1,6 @@
 // React
 import React from 'react';
-import { ask_server } from './ask_server';
+import { ask_server, get_places } from './ask_server';
 
 // Repository
 class Repository extends React.Component {
@@ -41,8 +41,8 @@ class Repository extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    ask_server(this.state).then(value =>{
-      this.setState({locations: value.locations})
+    get_places(this.state).then(value =>{
+      this.setState({locations: value})
     })
     
   }

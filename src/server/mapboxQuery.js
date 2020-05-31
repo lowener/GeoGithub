@@ -2,10 +2,17 @@ const https = require('https')
 const {name_codes} = require('./name-code.js')
 
 var geomaptoken = ''
-fs.readFile('tokenMapbox.txt', 'utf8', function(err, contents) {
-    geomaptoken = contents;
-    console.log(`Mapbox API Token loaded `)
-});
+
+if (process.env.tokenGeomap) {
+    geomaptoken = process.env.tokenGeomap
+}
+else {
+    fs.readFile('tokenMapbox.txt', 'utf8', function(err, contents) {
+        geomaptoken = contents;
+        console.log(`Mapbox API Token loaded `)
+    });
+    
+}
 
 function formatGeo(data) {
 

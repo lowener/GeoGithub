@@ -11,12 +11,17 @@ const client = new GraphQLClient.GraphQLClient(apiEndPoint, {
   },
 });
 var tokenAPI = ''
-fs.readFile('token.txt', 'utf8', function(err, contents) {
-    tokenAPI = contents;
-    client.setHeader('Authorization', `Bearer ${tokenAPI}`)
-    console.log(`Github API Token loaded `)
-});
 
+if (process.env.tokenGithub) {
+  tokenAPI = process.env.tokenGithub
+}
+else {
+  fs.readFile('token.txt', 'utf8', function(err, contents) {
+      tokenAPI = contents;
+      client.setHeader('Authorization', `Bearer ${tokenAPI}`)
+      console.log(`Github API Token loaded `)
+  });
+}
 
 const GetRepositoryInfoQuery = /* GraphQL */`
   query GetRepositoryIssues($name: String!, $login: String!) {

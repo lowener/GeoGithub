@@ -2,7 +2,8 @@
 import React, { Component } from 'react'
 
 // App.Components
-import Repository from './repository'
+import Repository from './component/repository'
+import MapViz from './component/Mapviz.js'
 
 // App
 export default class App extends Component {
@@ -22,6 +23,11 @@ export default class App extends Component {
 
   render () {
     // fetch from Github
-    return  <Repository {...this.routeForRepository('facebook', 'react')} />
+    return  (
+    <div id="MyAppJS">
+      <Repository {...this.routeForRepository('facebook', 'react')}/>
+      <MapViz />
+    </div>
+    );
   }
 }

@@ -28,14 +28,4 @@ async function get_countries(places) {
     return x
   })
   return Promise.all(new_places)
-/*
-  var place = places[0]
-  const SERVER_URL_PATH = 'http://localhost:8080/get_country'
-  var x = (async () => {
-    const rawResponse = await fetch(SERVER_URL_PATH + '/' + place, {method: 'GET'});
-    const content = await rawResponse.json()
-    return content
-  })();
-  places[0] = await x
-  return places*/
 }

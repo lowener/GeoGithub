@@ -1,6 +1,6 @@
 // React
 import React from 'react';
-import { ask_server, get_places } from './ask_server';
+import { get_places } from './ask_server';
 
 // Repository
 class Repository extends React.Component {

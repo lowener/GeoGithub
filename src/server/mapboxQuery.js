@@ -1,3 +1,6 @@
+const https = require('https')
+const {name_codes} = require('./name-code.js')
+
 var geomaptoken = ''
 fs.readFile('tokenMapbox.txt', 'utf8', function(err, contents) {
     geomaptoken = contents;

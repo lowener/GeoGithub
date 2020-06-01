@@ -5,8 +5,10 @@ var geomaptoken = ''
 
 if (process.env.tokenGeomap) {
     geomaptoken = process.env.tokenGeomap
+    console.log(`Mapbox API Token Read `)
 }
 else {
+    const fs = require('fs');
     fs.readFile('tokenMapbox.txt', 'utf8', function(err, contents) {
         geomaptoken = contents;
         console.log(`Mapbox API Token loaded `)

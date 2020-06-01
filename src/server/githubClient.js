@@ -14,12 +14,13 @@ var tokenAPI = ''
 
 if (process.env.tokenGithub) {
   tokenAPI = process.env.tokenGithub
+  console.log(`Github API Token Read`)
 }
 else {
   fs.readFile('token.txt', 'utf8', function(err, contents) {
       tokenAPI = contents;
       client.setHeader('Authorization', `Bearer ${tokenAPI}`)
-      console.log(`Github API Token loaded `)
+      console.log(`Github API Token loaded`)
   });
 }
 

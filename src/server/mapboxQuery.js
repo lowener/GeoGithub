@@ -3,8 +3,8 @@ const {name_codes} = require('./name-code.js')
 
 var geomaptoken = ''
 
-if (process.env.tokenGeomap) {
-    geomaptoken = process.env.tokenGeomap
+if (process.env.tokenMapbox) {
+    geomaptoken = process.env.tokenMapbox
     console.log(`Mapbox API Token Read `)
 }
 else {

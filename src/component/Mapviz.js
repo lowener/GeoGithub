@@ -23,6 +23,41 @@ export default class MapViz extends React.Component {
         let map = L.map(id)
     }
 
+    componentDidMount() {
+        //if (!this.state.map) this.init(this._mapNode);
+    }
+    componentDidUpdate(prevProps, prevState) {
+        // code to run when the component receives new props or state
+        // check to see if geojson is stored, map is created, and geojson overlay needs to be added
+        if (this.state.countries_json && this.state.map && !this.state.geojsonLayer) {
+          // add the geojson overlay
+          this.addGeoJSONLayer(this.state.countries_json);
+        }
+        /*
+        // check to see if the subway lines filter has changed
+        if (this.state.subwayLinesFilter !== prevState.subwayLinesFilter) {
+          // filter / re-render the geojson overlay
+          this.filterGeoJSONLayer();
+        }*/
+      }
+
+
+    addGeoJSONLayer(geojson) {
+        // create a native Leaflet GeoJSON SVG Layer to add as an interactive overlay to the map
+        // an options object is passed to define functions for customizing the layer
+        const geojsonLayer = L.geoJson(geojson, {
+          //onEachFeature: this.onEachFeature,
+          //pointToLayer: this.pointToLayer,
+          //filter: this.filterFeatures
+        });
+        // add our GeoJSON layer to the Leaflet map object
+        geojsonLayer.addTo(this.state.map);
+        // store the Leaflet GeoJSON layer in our component state for use later
+        this.setState({ geojsonLayer });
+        // fit the geographic extent of the GeoJSON layer within the map's bounds / viewport
+        this.zoomToFeature(geojsonLayer);
+      }
+
     render() {
         return (
             this.state.countries_json ?

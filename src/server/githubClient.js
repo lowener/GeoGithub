@@ -18,7 +18,7 @@ if (process.env.tokenGithub) {
   console.log(`Github API Token Read`)
 }
 else {
-  fs.readFile('token.txt', 'utf8', function(err, contents) {
+  fs.readFile('tokenGithub.txt', 'utf8', function(err, contents) {
       tokenAPI = contents;
       client.setHeader('Authorization', `Bearer ${tokenAPI}`)
       console.log(`Github API Token loaded`)

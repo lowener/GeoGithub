@@ -47,9 +47,23 @@ class Repository extends React.Component {
     
   }
 
+  countLocation(list) {
+    // Word count
+    var words = {};
+    for(var i = 0; i < list.length; i++) {
+        var word = list[i];
+        if (words.hasOwnProperty(word)) {
+            words[word]++;
+        } else {
+            words[word] = 1;
+        }
+    }
+    return words;
+}
+
   render() {
     return (
-    <div>
+    <div id="repoid">
       <form  onSubmit={this.onSubmit}>
         <label>
           Login: <input id="text-login" type="text" value={this.state.login} onChange={this.handleChangeLogin}/>

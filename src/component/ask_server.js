@@ -1,6 +1,6 @@
 
 export async function get_places(repository) {
-    const SERVER_URL_PATH = 'http://localhost:8080/ask'
+    const SERVER_URL_PATH = '/ask' ///'http://localhost:8080/ask'
     const bodystr = JSON.stringify(repository)
     return (async () => {
       const rawResponse = await fetch(SERVER_URL_PATH, {
@@ -18,11 +18,11 @@ export async function get_places(repository) {
 
 async function get_countries(places) {
   var new_places = places.map(async place => {
-    const SERVER_URL_PATH = 'http://localhost:8080/get_country'
+    const SERVER_URL_PATH = '/get_country'//'http://localhost:8080/get_country'//https://mapviz-lowener.herokuapp.com
     var x =  await (async () => {
       const rawResponse = await fetch(SERVER_URL_PATH + '/' + place, {method: 'GET'});
       const content = await rawResponse.json();
-      return content.country
+      return content.Country
     })();
 
     return x

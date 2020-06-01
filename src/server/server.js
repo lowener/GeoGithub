@@ -1,12 +1,20 @@
 'use strict'
 
-const app = require('express')();
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const askGithub = require('./githubClient.js')
 const {find_location} = require('./mapboxQuery.js')
 const port = process.env.PORT || 8080
 const https = require('https')
 const {name_codes} = require('./name-code.js')
+const path = require('path');
+
+app.use(express.static('build'))
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
+});
 
 app.use(bodyParser.json());
 

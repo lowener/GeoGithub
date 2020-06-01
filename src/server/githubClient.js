@@ -14,6 +14,7 @@ var tokenAPI = ''
 
 if (process.env.tokenGithub) {
   tokenAPI = process.env.tokenGithub
+  client.setHeader('Authorization', `Bearer ${tokenAPI}`)
   console.log(`Github API Token Read`)
 }
 else {

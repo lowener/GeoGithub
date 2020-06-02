@@ -42,7 +42,9 @@ class Repository extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     get_places(this.state).then(value =>{
-      this.setState({locations: value})
+      var countryCount = this.countLocation(value)
+      
+      this.setState({locations: countryCount})
     })
     
   }
@@ -76,8 +78,10 @@ class Repository extends React.Component {
         <input id="btn-submit" type="submit"/>
       </form>
       <h2>{this.state.login}/{this.state.name}</h2>
-      <ul>
-        <li>Locations: {this.state.locations.toLocaleString()}</li>
+      <ul>Locations: 
+        
+          <li>{JSON.stringify(this.state.locations)}</li>
+        
       </ul>
     </div>)
   }

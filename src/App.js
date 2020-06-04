@@ -9,7 +9,11 @@ import MapViz from './component/Mapviz.js'
 export default class App extends Component {
   constructor () {
     super()
-    this.state = { login: false }
+    this.state = { 
+      login: false, 
+      countryState: null 
+    }
+    this.cbUpdateChildRepo = this.cbUpdateChildRepo.bind(this)
   }
 
   routeForRepository (login, name) {
@@ -21,12 +25,20 @@ export default class App extends Component {
     }
   }
 
+  cbUpdateChildRepo(newCountryState) {
+    this.setState({countryState: newCountryState})
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.MapVizRef.getData(this.state.countryState)
+  }
+
   render () {
     // fetch from Github
     return  (
     <div id="MyAppJS">
-      <Repository {...this.routeForRepository('facebook', 'react')}/>
-      <MapViz />
+      <Repository {...this.routeForRepository('facebook', 'react')} cbUpdateRepo={this.cbUpdateChildRepo}/>
+      <MapViz ref={(MapVizRef) => { this.MapVizRef = MapVizRef; }}/>
     </div>
     );
   }

@@ -22,9 +22,12 @@ async function get_countries(places) {
     var x =  await (async () => {
       const rawResponse = await fetch(SERVER_URL_PATH + '/' + place, {method: 'GET'});
       const content = await rawResponse.json();
-      return content.Country
+      return content.CountryCode
     })();
-
+    /*
+    "Country": country,
+    "CountryCode": countryCode
+    */
     return x
   })
   return Promise.all(new_places)

@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import { get_places } from './ask_server';
+import MapViz from './Mapviz'
 
 // Repository
 class Repository extends React.Component {
@@ -11,24 +12,35 @@ class Repository extends React.Component {
     this.state = {
       login: props.login ? props.login : "facebook",
       name: props.name ? props.name : "react",
+      cbUpdateRepo: props.cbUpdateRepo ? props.cbUpdateRepo : null,
       locations: [],
     };
     this.handleChangeLogin = this.handleChangeLogin.bind(this);
     this.handleChangeName = this.handleChangeName.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
+    this.getLocation = this.getLocation.bind(this)
+  }
+
+  getLocation(){
+    return this.locations
   }
 
   componentWillReceiveProps(newProps) {
     // DRY
-    const repo = newProps.data.repository.ref.target.history.edges;
 
 
     // states
     this.setState({
       login: this.props.login,
       name: this.props.name,
-      locations: repo.map(element => element.node.author.user.location)
     });
+    if (newProps.data){
+      const repo = newProps.data.repository.ref.target.history.edges;
+      this.setState({
+      locations: repo.map(element => element.node.author.user.location)
+      })
+    }
+    
   }
 
   handleChangeLogin(event) {  
@@ -45,8 +57,8 @@ class Repository extends React.Component {
       var countryCount = this.countLocation(value)
       
       this.setState({locations: countryCount})
+      this.state.cbUpdateRepo(this.state.locations)
     })
-    
   }
 
   countLocation(list) {
@@ -61,7 +73,7 @@ class Repository extends React.Component {
         }
     }
     return words;
-}
+  }
 
   render() {
     return (
